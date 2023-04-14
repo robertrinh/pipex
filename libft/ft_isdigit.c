@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   help.c                                             :+:    :+:            */
+/*   ft_isdigit.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/15 11:42:10 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/04/13 15:42:06 by qtrinh        ########   odam.nl         */
+/*   Created: 2022/10/04 17:45:20 by qtrinh        #+#    #+#                 */
+/*   Updated: 2022/10/21 16:53:01 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-
-void	error_handler(char *error_msg, t_pipex *pipex)
+int	ft_isdigit(int c)
 {
-	free(pipex);
-	perror(error_msg);
-	exit(EXIT_FAILURE);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
 
-t_pipex	*pepe_init(void)
+/* int main(void)
 {
-	t_pipex *pipex;
-	pipex = ft_calloc(sizeof(t_pipex), 1);
-	//je kan waardes nog erinzetten
-	//ook voor argc/argv als je dat nog wilt gebruiken
-	return (pipex);
-}
+    char    str;
 
+    str = 'a';
+    if(ft_isdigit(str))
+        printf("own functie: DONG DONG DONG\n");
+    else
+        printf("own functie: This is a pen\n");
+    if(isdigit(str))
+        printf("OG functie: DONG DONG DONG\n");
+    else
+        printf("OG functie: This is a pen\n");
+}
+ */

@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   help.c                                             :+:    :+:            */
+/*   ft_isprint.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/15 11:42:10 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/04/13 15:42:06 by qtrinh        ########   odam.nl         */
+/*   Created: 2022/10/12 14:30:46 by qtrinh        #+#    #+#                 */
+/*   Updated: 2022/10/21 16:53:01 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-
-void	error_handler(char *error_msg, t_pipex *pipex)
+int	ft_isprint(int c)
 {
-	free(pipex);
-	perror(error_msg);
-	exit(EXIT_FAILURE);
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }
 
-t_pipex	*pepe_init(void)
+/* int	main(void)
 {
-	t_pipex *pipex;
-	pipex = ft_calloc(sizeof(t_pipex), 1);
-	//je kan waardes nog erinzetten
-	//ook voor argc/argv als je dat nog wilt gebruiken
-	return (pipex);
-}
+    char    str;
 
+    str = 'b';
+    if (ft_isprint(str))
+        printf("own functie: 1\n");
+    else
+        printf("own functie: 0\n");
+    if (isprint(str))
+        printf("OG functie: 1\n");
+    else
+        printf("OG functie: 0\n");
+} */

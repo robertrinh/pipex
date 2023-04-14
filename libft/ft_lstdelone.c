@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   help.c                                             :+:    :+:            */
+/*   ft_lstdelone.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/15 11:42:10 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/04/13 15:42:06 by qtrinh        ########   odam.nl         */
+/*   Created: 2022/11/16 16:26:06 by qtrinh        #+#    #+#                 */
+/*   Updated: 2022/11/16 16:30:26 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	error_handler(char *error_msg, t_pipex *pipex)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	free(pipex);
-	perror(error_msg);
-	exit(EXIT_FAILURE);
+	del(lst->content);
+	free(lst);
 }
-
-t_pipex	*pepe_init(void)
-{
-	t_pipex *pipex;
-	pipex = ft_calloc(sizeof(t_pipex), 1);
-	//je kan waardes nog erinzetten
-	//ook voor argc/argv als je dat nog wilt gebruiken
-	return (pipex);
-}
-

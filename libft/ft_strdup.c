@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   help.c                                             :+:    :+:            */
+/*   ft_strdup.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/15 11:42:10 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/04/13 15:42:06 by qtrinh        ########   odam.nl         */
+/*   Created: 2022/10/21 16:46:35 by qtrinh        #+#    #+#                 */
+/*   Updated: 2022/11/18 14:34:07 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	error_handler(char *error_msg, t_pipex *pipex)
+char	*ft_strdup(const char *s1)
 {
-	free(pipex);
-	perror(error_msg);
-	exit(EXIT_FAILURE);
+	void	*ptr;
+	size_t	len;
+
+	len = ft_strlen(s1);
+	ptr = malloc(sizeof(char) * (len + 1));
+	if (!ptr)
+		return (NULL);
+	ft_memcpy(ptr, s1, len + 1);
+	return (ptr);
 }
 
-t_pipex	*pepe_init(void)
+/* #include <stdio.h>
+#include <string.h>
+int	main(void)
 {
-	t_pipex *pipex;
-	pipex = ft_calloc(sizeof(t_pipex), 1);
-	//je kan waardes nog erinzetten
-	//ook voor argc/argv als je dat nog wilt gebruiken
-	return (pipex);
-}
+	char	str[] = "choco mint";
 
+	printf("OG %s \n", strdup(str));
+	printf("Ours %s \n", ft_strdup(str));
+} */

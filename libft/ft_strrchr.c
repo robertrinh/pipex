@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   help.c                                             :+:    :+:            */
+/*   ft_strrchr.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/15 11:42:10 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/04/13 15:42:06 by qtrinh        ########   odam.nl         */
+/*   Created: 2022/10/13 16:35:59 by qtrinh        #+#    #+#                 */
+/*   Updated: 2022/11/18 15:27:01 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	error_handler(char *error_msg, t_pipex *pipex)
+char	*ft_strrchr(const char *s, int c)
 {
-	free(pipex);
-	perror(error_msg);
-	exit(EXIT_FAILURE);
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	while (i >= 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i--;
+	}
+	return (0);
 }
 
-t_pipex	*pepe_init(void)
+/* int	main(void)
 {
-	t_pipex *pipex;
-	pipex = ft_calloc(sizeof(t_pipex), 1);
-	//je kan waardes nog erinzetten
-	//ook voor argc/argv als je dat nog wilt gebruiken
-	return (pipex);
+	char	str[] = "raaizou";
+
+	printf("OG %s \n", strrchr(str, 'a'));
+	printf("Ours %s \n", ft_strrchr(str, 'a'));
 }
 
+//zoekt de LAATSTE char op en print datgene erna helemaal eruit
+*/

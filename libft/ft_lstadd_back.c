@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   help.c                                             :+:    :+:            */
+/*   ft_lstadd_back.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/15 11:42:10 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/04/13 15:42:06 by qtrinh        ########   odam.nl         */
+/*   Created: 2022/11/16 15:52:38 by qtrinh        #+#    #+#                 */
+/*   Updated: 2022/11/17 17:10:38 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-void	error_handler(char *error_msg, t_pipex *pipex)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	free(pipex);
-	perror(error_msg);
-	exit(EXIT_FAILURE);
-}
+	t_list	*temp;
 
-t_pipex	*pepe_init(void)
-{
-	t_pipex *pipex;
-	pipex = ft_calloc(sizeof(t_pipex), 1);
-	//je kan waardes nog erinzetten
-	//ook voor argc/argv als je dat nog wilt gebruiken
-	return (pipex);
+	temp = *lst;
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	else
+		temp = ft_lstlast(*lst);
+		temp->next = new;
 }
-
