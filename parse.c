@@ -6,16 +6,16 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 16:04:08 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/04/26 17:13:45 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/04/26 18:04:56 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+#include <stdio.h> //delete afterwards
 char    **seek_path(char *envp[])
 {
     char    *temp_path;
-    
     int     i;
     int     j;
     
@@ -24,9 +24,10 @@ char    **seek_path(char *envp[])
     while (envp[i])
     {
         if (ft_strnstr(envp[j], "PATH=", ft_strlen(envp[j])))
-            break;
-        i++;
+            break ;
+        // printf("komt hij bij path? moet 4x text showen\n");
         j++;
+        i++;
     }
     if (!envp[i])
         error_handler("no ENVP");

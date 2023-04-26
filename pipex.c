@@ -107,7 +107,7 @@ int	main(int argc, char *argv[], char *envp[])
 		error_handler("no files");
 	// if (!in_n_outfile(argc, argv))
 	// 	return (1);
-	pepe.path = seek_path(envp);
+	pepe.path = get_path(envp, pepe);
 	pipex(pepe,argc,argv,envp);
 	close(pepe.infile);
 	close(pepe.outfile);
