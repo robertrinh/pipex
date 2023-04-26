@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:08:17 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/04/19 18:11:31 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/04/26 17:28:42 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ typedef struct s_pipex
 	char	**path;
 	char	**cmd;
 	int		pipefd[2];
-	int		fd1;
-	int		fd2;
+	int		infile;
+	int		outfile;
 	pid_t	kiddo;
 }	t_pipex;
 
-// void	pipex(int f1, int f2);
 int		main(int argc, char *argv[], char *envp[]);
-void	pipex(int argc, char *argv[], char *envp[]);
-// int		main(void);
-void	error_handler(char *error_msg, t_pipex *pipex);
+void	pipex(t_pipex pepe, int argc, char *argv[], char *envp[]);
+void	error_handler(char *error_msg);
 t_pipex	*pepe_init(void);
-void	kiddo1_process(t_pipex *pipex, char *argv[], char *envp[]);
+void	kiddo_process(t_pipex pepe, char *argv, char *envp[]);
+char    **get_path(char *envp[], t_pipex pepe);
+char    **seek_path(char *envp[]);
 
 #endif
