@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:08:17 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/04/26 17:28:42 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/05/05 17:16:16 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ typedef struct s_pipex
 {
 	char	**path;
 	char	**cmd;
+	char	**cmd_argc;
 	int		pipefd[2];
 	int		infile;
 	int		outfile;
 	pid_t	kiddo;
+	pid_t	kiddo2;
+	
 }	t_pipex;
 
 int		main(int argc, char *argv[], char *envp[]);
