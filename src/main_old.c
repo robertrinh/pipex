@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 #include <stdio.h> //delete afterwards
 
 // static void	kiddo_process(t_pipex pepe, char *argv, char *envp[])
@@ -69,7 +69,7 @@ static void	kiddo2_process(t_pipex pepe, char *argv, char *envp[])
 // 	error_handler("DUP2 ERROR", pepe);
 //STAAT IN NIEUWE FUNCTIE
 
-void	pipex(t_pipex pepe, int argc, char *argv[], char *envp[])
+void	pipexx(t_pipex pepe, int argc, char *argv[], char *envp[])
 {
 	int	i;
 

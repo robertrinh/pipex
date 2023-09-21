@@ -1,48 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_printf_stuff.c                                  :+:    :+:            */
+/*   init_bruv.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: robertrinh <robertrinh@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/24 21:24:37 by robertrinh    #+#    #+#                 */
-/*   Updated: 2023/03/15 16:36:52 by qtrinh        ########   odam.nl         */
+/*   Created: 2023/09/21 16:02:07 by robertrinh    #+#    #+#                 */
+/*   Updated: 2023/09/21 16:39:03 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/pipex.h"
 
-int	print_char(int c)
+t_pipex init_bruv(char **av, char **envp)
 {
-	write(1, &c, 1);
-	return (1);
-}
+    t_pipex *pepe;
 
-int	print_str(char *str)
-{
-	int	str_len;
-
-	if (str == NULL)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
-	str_len = ft_strlen(str);
-	write(1, str, str_len);
-	return (str_len);
-}
-
-int	print_num(int num)
-{
-	int		count;
-	char	*str;
-
-	count = 0;
-	str = ft_itoa(num);
-	if (str)
-	{
-		count += print_str(str);
-		free(str);
-	}
-	return (count);
+    pepe = ft_calloc(sizeof(t_pipex), 1);
+    //return if fail?
+    pepe->av = av;
+    pepe->envp = envp;
+    pepe->path_f = 0;
+   // pepe->path = parse_env(pepe->envp); //maak parse env
+    if (!pepe->path)
+        pepe->path_f = -1;
+    return (*pepe);
 }

@@ -6,21 +6,25 @@
 #    By: qtrinh <qtrinh@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/03/01 15:08:12 by qtrinh        #+#    #+#                  #
-#    Updated: 2023/04/26 17:22:25 by robertrinh    ########   odam.nl          #
+#    Updated: 2023/09/21 16:40:19 by robertrinh    ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := pipex
 
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra -g #delete -g?
-# AR := ar -src
+CFLAGS := -Wall -Werror -Wextra -g #gflag for debug
+HEADER := include/pipex.h
+INCLUDE := -I include
+OBJDIR = objects
 
-SRCS := pipex.c \
-		help.c \
-		parse.c \
+SRC := init_bruv.c \
+		main.c \
+		utils.c \
+		# parse.c \
 
-OBJ := $(SRCS:.c=.o)
+vpath %.c	src
+OBJ = $(patsubst %.c, $(OBJDIR)/%.o, $(SRC))
 
 #COLORS SHOW
 BOLD_GREEN=\033[1;92m
@@ -35,22 +39,24 @@ END_COLOUR=\033[0m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@cd libft && (MAKE)
+	@cd libft && $(MAKE)
 	@$(CC) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME)
-	@echo "${RED}compiling? ${BOLD_GREEN} Completed it mate ${END_COLOUR}"
+	@echo "${RED}compiling? ${BOLD_GREEN}completed it mate ${END_COLOUR}"
 
-%.o: %.c
-	@echo "${RED} compiling ${GRAY}pipex.. ${PURPLE}blub.. blep.. ${INTENSE_CYAN}$< ${END_COLOUR}"
-	@$(CC) -c $(CFLAGS) $< -o $@
+$(OBJDIR)/%.o: %.c $(HEADER)
+	@mkdir -p $(OBJDIR)
+	@echo "${RED} assembling ${GRAY}pijpen..${INTENSE_CYAN}$<${YELLOW}ccccc ${END_COLOUR}"
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)
+	@rm -rf $(OBJDIR)
 	@$(MAKE) clean -C ./libft
 
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C ./libft
-	@echo "${INTENSE_CYAN}library..? ${BOLD_GREEN}LIBRARY..? ${BOLD_RED}LIBRARY!!!"
+	@echo "${BOLD_GREEN}you done pijpen? ${END_COLOUR}"
 
 re: fclean all
 

@@ -6,11 +6,11 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 16:04:08 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/05/05 17:28:43 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/09/21 15:06:36 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 #include <stdio.h> //delete afterwards
 char	**seek_path(char *envp[])
 {
