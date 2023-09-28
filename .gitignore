@@ -3,3 +3,4 @@ objects
 *.a
 pipex
 **/.DS_Store
+notes.txt
