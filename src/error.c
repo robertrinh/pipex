@@ -6,7 +6,7 @@
 /*   By: robertrinh <robertrinh@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:15:32 by robertrinh    #+#    #+#                 */
-/*   Updated: 2023/09/28 15:32:49 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/09/28 18:18:50 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,4 @@ void    error_path(char *cmd)
     exit(127); //command no found
 }
 
-void    error_cmd(char *str, int error)
-{
-    ft_putstr_fd(str, 2);
-    ft_putstr_fd()
-}
 

@@ -6,7 +6,7 @@
 #    By: qtrinh <qtrinh@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/03/01 15:08:12 by qtrinh        #+#    #+#                  #
-#    Updated: 2023/09/22 16:14:23 by robertrinh    ########   odam.nl          #
+#    Updated: 2023/09/29 15:24:15 by robertrinh    ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ INCLUDE := -I include
 OBJDIR = objects
 
 SRC := error.c \
-		init_bruv.c \
 		main.c \
-		utils.c \
+		parse.c \
 		pipex.c \
+		utils.c \
 
 vpath %.c	src
 OBJ = $(patsubst %.c, $(OBJDIR)/%.o, $(SRC))

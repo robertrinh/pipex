@@ -6,27 +6,28 @@
 /*   By: robertrinh <robertrinh@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 16:16:25 by robertrinh    #+#    #+#                 */
-/*   Updated: 2023/09/28 18:11:28 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/10/06 16:34:42 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+#include <stdio.h>
 
-void    kiddo_1_write(t_pipex *pepe, char **envp, char *cmd)
+void    kiddo_1_write(t_pipex *pepe, char **envp)
 {
     pepe->infile = open(pepe->av[1], O_RDONLY);
     if (pepe->infile == -1)
-        error_brexit("can't open infile", errno);
-	if (dup2(pepe->pipefd[WRITE], STDOUT_FILENO) == -1)
-		error_brexit("DUP2 ERROR", errno);;
+        error_brexit("Can't open infile", errno);
     if (dup2(pepe->infile, STDIN_FILENO) == -1)
+		error_brexit("DUP2 ERROR", errno);
+	if (dup2(pepe->pipefd[WRITE], STDOUT_FILENO) == -1)
 		error_brexit("DUP2 ERROR", errno);
     close_pipes(pepe->pipefd[READ], pepe->pipefd[WRITE]);
     close(pepe->infile);
     run_cmd(envp, pepe, 2);
 }
 
-void   kiddo_2_read(t_pipex *pepe, char **envp, char *cmd)
+void   kiddo_2_read(t_pipex *pepe, char **envp)
 {
     pepe->outfile = open(pepe->av[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
     if (pepe->outfile == -1)
@@ -46,11 +47,12 @@ void    run_cmd(char **envp, t_pipex *pepe, int cmdlen)
     char    **cmd_args;
 
     cmd_args = ft_split(pepe->av[cmdlen], ' ');
-    cmd = correct_path_cmd(envp, pepe, cmd);
+    cmd = correct_path_cmd(pepe, *cmd_args);
+    // printf("cmd now is: %s \n", cmd); //delete
     if (cmd && access(cmd, X_OK) == -1)
         error_access(cmd);
     if (execve(cmd, cmd_args, envp) == -1)
-        error_brexit("iets met space", errno);
+        error_brexit("execve", errno);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:08:17 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/09/28 18:04:02 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/09/29 16:58:06 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,15 @@ t_pipex	*init_bruv(char **av, char **envp);
 void    error_brexit(char *str, int error);
 int	pipex(t_pipex *pepe);
 void    close_pipes(int fd_one, int fd_two);
-char	**get_path(char **envp, t_pipex *pepe);
-char	*correct_path_cmd(char **envp, t_pipex *pepe, char *cmd);
+char	**get_path(char **envp);
+char	*correct_path_cmd(t_pipex *pepe, char *cmd);
+void    run_cmd(char **envp, t_pipex *pepe, int cmdlen);
+char	*get_cmd(t_pipex *pepe, char *cmd);
 
 void    error_path(char *cmd);
 void	error_access(char *path);
 
-void	kiddo_1_write(t_pipex *pepe, char **envp, char *cmd);
-void	kiddo_2_read(t_pipex *pepe, char **envp, char *cmd);
-// void	error_handler(char *error_msg);
-// t_pipex	*pepe_init(void);
-// void	kiddo_process(t_pipex pepe, char *argv, char *envp[]);
-// char    **get_path(char *envp[], t_pipex pepe);
-// char    **seek_path(char *envp[]);
+void	kiddo_1_write(t_pipex *pepe, char **envp);
+void	kiddo_2_read(t_pipex *pepe, char **envp);
 
 #endif

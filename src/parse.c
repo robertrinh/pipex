@@ -6,11 +6,12 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 16:04:08 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/09/28 17:58:40 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/10/06 16:34:27 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+#include <stdio.h> //delete
 
 /**
  * @brief seeks if PATH exists in env
@@ -25,7 +26,7 @@ static char	*parse_env(char **envp)
 	while (envp[i])
 	{
 		if (ft_strnstr(envp[i], "PATH=", ft_strlen(envp[i])))
-			return (ft_substr(envp[i], 5, ft_strlen(envp[i] - 5)));
+			return (ft_substr(envp[i], 5, ft_strlen(envp[i])));
 		i++;
 	}
 	return (NULL);	
@@ -37,7 +38,7 @@ static char	*parse_env(char **envp)
  * @param t_pipex the struct to store the path
  * @return the path (array of directories)
 */
-char	**get_path(char **envp, t_pipex *pepe)
+char	**get_path(char **envp)
 {
 	char	*env_path;
 	char	**split_path;
@@ -46,37 +47,46 @@ char	**get_path(char **envp, t_pipex *pepe)
 	if (!env_path)
 		error_brexit("no path", errno);
 	split_path = ft_split(env_path, ':');
-	if (!pepe->path)
+	// while (*split_path)
+	// {
+	// 	printf("split_path is: %s\n", *split_path);
+	// 	split_path++;
+	// }
+	if (!split_path)
 		error_brexit("split fail", errno);
 	free(env_path);
 	return (split_path);
 }
 
-char	*correct_path_cmd(char **envp, t_pipex *pepe, char *cmd)
+char	*correct_path_cmd(t_pipex *pepe, char *cmd)
 {
 	if (cmd[0] == '/' || cmd[0] == '.')
 	{
 		if (access(cmd, F_OK) == 0)
-			return(ft_strdup(cmd));
+			return (ft_strdup(cmd));
 		return (NULL);
 	}
-	return (get_cmd(envp, pepe, cmd));
+	else
+		return (get_cmd(pepe, cmd));
 }
 
-char	*get_cmd(char **envp, t_pipex *pepe, char *cmd)
+char	*get_cmd(t_pipex *pepe, char *cmd)
 {
 	int	i;
 	char	*temp;
 	char	*arg_path;
-	char	*cmd_args;
 
 	i = 0;
+	// printf("pepe->path[0] is: %s\n", pepe->path[0]);
+	// printf("pepe->path[1] is: %s \n", pepe->path[1]); //delete
 	while (pepe->path[i])
 	{
 		temp = ft_strjoin("/", cmd);
+		// printf("temp is: %s \n", temp); //delete
 		if (!temp)
 			error_brexit("malloc", errno);
-		arg_path = ft_strjoin(pepe->path, temp);
+		arg_path = ft_strjoin(pepe->path[i], temp);
+		// printf("arg_path is: %s\n", arg_path);
 		if (!arg_path)
 			error_brexit("malloc", errno);
 		free(temp);
@@ -88,7 +98,6 @@ char	*get_cmd(char **envp, t_pipex *pepe, char *cmd)
 	return (NULL);
 }
 
-void	exe_cmd_paths(t_pipex *pepe, )
 
 
 

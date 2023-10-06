@@ -6,7 +6,7 @@
 /*   By: robertrinh <robertrinh@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:21:24 by robertrinh    #+#    #+#                 */
-/*   Updated: 2023/09/22 16:13:15 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/10/05 16:59:06 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 static void *close_program(t_pipex *pepe)
 {
     int status;
+    int status1;
     //status 1 + 2, want moet status child 1 gecheckt worden?
 
     close_pipes(pepe->pipefd[READ], pepe->pipefd[WRITE]);
-    waitpid(pepe->kiddo1, NULL, 0);
-    waitpid(pepe->kiddo2, &status, 0);
+    waitpid(pepe->kiddo1, &status, 0);
+    waitpid(pepe->kiddo2, &status1, 0);
+    // close(pepe->infile);
+    // close(pepe->outfile);
     if (WIFEXITED(status))
         exit(WEXITSTATUS(status));
+    if (WIFEXITED(status1))
+        exit(WEXITSTATUS(status1));
     exit(EXIT_SUCCESS);
 }
 
@@ -38,13 +43,12 @@ int main(int ac, char **av, char **envp)
     if (pepe->kiddo1 == -1)
         error_brexit("fork1", errno);
     if (pepe->kiddo1 == 0)
-        kiddo_1_write(pepe);
+        kiddo_1_write(pepe, envp);
     pepe->kiddo2 = fork();
     if (pepe->kiddo2 == -1)
         error_brexit("fork2", errno);
     if (pepe->kiddo2 == 0)
-        kiddo_2_read(pepe);
-    close_pipes(pepe->pipefd[READ], pepe->pipefd[WRITE]);
+        kiddo_2_read(pepe, envp);
     close_program(pepe);
 }
 
