@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 16:04:08 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/10/06 17:30:43 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/10/12 17:02:47 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*parse_env(char **envp)
 			return (ft_substr(envp[i], 5, ft_strlen(envp[i])));
 		i++;
 	}
-	return (NULL);	
+	return (NULL);
 }
 
 /**
@@ -54,11 +54,12 @@ char	**get_path(char **envp)
 }
 
 /**
- * @brief finds command through two ways; either the absolute path (./...) or relative path
+ * @brief finds command through two ways;
+ * @brief either the absolute path (./...) or relative path
  * @param t_pipex the struct which contains path
  * @param cmd the command used
- * @return strdup of absolute command in case / or . is found and if command exists or
- * @return relative path in case absolute is not found
+ * @return strdup of absolute command in case / or . is found + cmd exists
+ * @return or relative path in case absolute is not found
 */
 char	*correct_path_cmd(t_pipex *pepe, char *cmd)
 {
@@ -71,6 +72,7 @@ char	*correct_path_cmd(t_pipex *pepe, char *cmd)
 	else
 		return (get_cmd(pepe, cmd));
 }
+
 /**
  * @brief loops through parsed envp to find the cmd
  * @param t_pipex the struct which has path stored
@@ -80,7 +82,7 @@ char	*correct_path_cmd(t_pipex *pepe, char *cmd)
 */
 char	*get_cmd(t_pipex *pepe, char *cmd)
 {
-	int	i;
+	int		i;
 	char	*temp;
 	char	*arg_path;
 
