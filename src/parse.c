@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 16:04:08 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/10/06 16:34:27 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/10/06 17:30:43 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*parse_env(char **envp)
 }
 
 /**
- * @brief splits PATH by executable ":", returns array of directories
+ * @brief splits PATH by executable ":", returns split array of directories
  * @param envp the enviromental path
  * @param t_pipex the struct to store the path
  * @return the path (array of directories)
@@ -47,17 +47,19 @@ char	**get_path(char **envp)
 	if (!env_path)
 		error_brexit("no path", errno);
 	split_path = ft_split(env_path, ':');
-	// while (*split_path)
-	// {
-	// 	printf("split_path is: %s\n", *split_path);
-	// 	split_path++;
-	// }
 	if (!split_path)
 		error_brexit("split fail", errno);
 	free(env_path);
 	return (split_path);
 }
 
+/**
+ * @brief finds command through two ways; either the absolute path (./...) or relative path
+ * @param t_pipex the struct which contains path
+ * @param cmd the command used
+ * @return strdup of absolute command in case / or . is found and if command exists or
+ * @return relative path in case absolute is not found
+*/
 char	*correct_path_cmd(t_pipex *pepe, char *cmd)
 {
 	if (cmd[0] == '/' || cmd[0] == '.')
@@ -69,7 +71,13 @@ char	*correct_path_cmd(t_pipex *pepe, char *cmd)
 	else
 		return (get_cmd(pepe, cmd));
 }
-
+/**
+ * @brief loops through parsed envp to find the cmd
+ * @param t_pipex the struct which has path stored
+ * @param cmd the command used
+ * @return location of the executable after in case file exists
+ * @return or NULL in case not found
+*/
 char	*get_cmd(t_pipex *pepe, char *cmd)
 {
 	int	i;
@@ -77,16 +85,12 @@ char	*get_cmd(t_pipex *pepe, char *cmd)
 	char	*arg_path;
 
 	i = 0;
-	// printf("pepe->path[0] is: %s\n", pepe->path[0]);
-	// printf("pepe->path[1] is: %s \n", pepe->path[1]); //delete
 	while (pepe->path[i])
 	{
 		temp = ft_strjoin("/", cmd);
-		// printf("temp is: %s \n", temp); //delete
 		if (!temp)
 			error_brexit("malloc", errno);
 		arg_path = ft_strjoin(pepe->path[i], temp);
-		// printf("arg_path is: %s\n", arg_path);
 		if (!arg_path)
 			error_brexit("malloc", errno);
 		free(temp);
@@ -97,44 +101,3 @@ char	*get_cmd(t_pipex *pepe, char *cmd)
 	}
 	return (NULL);
 }
-
-
-
-
-
-// char	**seek_path(char *envp[])
-// {
-// 	char	*temp_path;
-// 	int		i;
-
-// 	i = 0;
-// 	while (envp[i])
-// 	{
-// 		if (ft_strnstr(envp[i], "PATH=", ft_strlen(envp[i])))
-// 			break ;
-
-// 		i++;
-// 	}
-// 	if (!envp[i])
-// 		error_handler("no ENVP");
-// 	temp_path = ft_substr(envp[i], 5, ft_strlen(envp[i]));
-// 	return (ft_split(temp_path, ':'));
-// }
-
-// char	**get_cmd(char *envp[], t_pipex pepe)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	pepe.path = seek_path(envp);
-// 	// printf("path is: %s \n", pepe.path[i]);
-// 	if (!pepe.path)
-// 		error_handler("no path");
-// 	while (pepe.path[i])
-// 	{
-// 		pepe.path[i] = ft_strjoin(pepe.path[i], "/");
-// 		// printf("path after strjoin: %s \n", pepe.path[i]);
-// 		i++;
-// 	}
-// 	return (pepe.path);
-// }

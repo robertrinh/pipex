@@ -6,7 +6,7 @@
 /*   By: robertrinh <robertrinh@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:21:24 by robertrinh    #+#    #+#                 */
-/*   Updated: 2023/10/05 16:59:06 by robertrinh    ########   odam.nl         */
+/*   Updated: 2023/10/06 17:37:03 by robertrinh    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ static void *close_program(t_pipex *pepe)
 {
     int status;
     int status1;
-    //status 1 + 2, want moet status child 1 gecheckt worden?
 
     close_pipes(pepe->pipefd[READ], pepe->pipefd[WRITE]);
     waitpid(pepe->kiddo1, &status, 0);
     waitpid(pepe->kiddo2, &status1, 0);
-    // close(pepe->infile);
-    // close(pepe->outfile);
     if (WIFEXITED(status))
         exit(WEXITSTATUS(status));
     if (WIFEXITED(status1))
@@ -52,15 +49,9 @@ int main(int ac, char **av, char **envp)
     close_program(pepe);
 }
 
-
-//strncmp + strjoin + split, needed functions
-//parsing: loop through the env (strncmp first 5 PATH=),
-//afterwards loop through the string and split every :
-//open / read infile
-//access cmd = check accessiblity of a file
-//execute the command
-
-//env to check enviroment paths
+//things to consider:
+//error handling
+//empty commands?
 
 //./pipex Makefile "ps aux" "grep pipex" outfile
 //./pipex Makefile "ps aux" "lsof -c pipex" outfile (checkt welke fd's openstaan)
