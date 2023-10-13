@@ -6,7 +6,7 @@
 /*   By: robertrinh <robertrinh@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 16:16:25 by robertrinh    #+#    #+#                 */
-/*   Updated: 2023/10/13 14:35:20 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/10/13 16:40:03 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 */
 void	kiddo_1_write(t_pipex *pepe, char **envp)
 {
-	//no such file or directory error check -> F_OK op infile. 
 	pepe->infile = open(pepe->av[1], O_RDONLY);
 	if (pepe->infile == -1)
 		error_brexit("infile", errno);
@@ -74,9 +73,10 @@ void	run_cmd(char **envp, t_pipex *pepe, int cmdloc)
 	cmd_args = ft_split(pepe->av[cmdloc], ' ');
 	check_nullspace(pepe->av[cmdloc]);
 	cmd = correct_path_cmd(pepe, *cmd_args);
+	if (!cmd)
+		error_command(pepe->av[cmdloc]);
 	if (cmd && access(cmd, X_OK) == -1)
-		error_access();
+		error_access(cmd);
 	if (execve(cmd, cmd_args, envp) == -1)
 		error_brexit("execve fail", errno);
-		// error_command();
 }

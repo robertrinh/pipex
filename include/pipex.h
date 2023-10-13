@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:08:17 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/10/13 12:21:16 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/10/13 16:02:09 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ char	*correct_path_cmd(t_pipex *pepe, char *cmd);
 void	run_cmd(char **envp, t_pipex *pepe, int cmdlen);
 char	*get_cmd(t_pipex *pepe, char *cmd);
 
-void	error_command(void);
-void	error_access(void);
+void	error_arg(void);
+void	error_command(char *str);
+void	error_access(char *cmd);
+void	error_filedir(void);
+void	error_nullspace(char *str, int error);
 void	check_nullspace(char *str);
 
 void	kiddo_1_write(t_pipex *pepe, char **envp);

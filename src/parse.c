@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 16:04:08 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/10/13 14:30:53 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/10/13 15:22:33 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,22 @@ char	**get_path(char **envp)
 
 /**
  * @brief finds command through two ways;
- * @brief either the absolute path (./...) or relative path
+ * @brief either the absolute path (~/../..) or relative path
  * @param t_pipex the struct which contains path
  * @param cmd the command used
- * @return strdup of absolute command in case / or . is found + cmd exists
+ * @return strdup of absolute command in case cmd is found
  * @return or relative path in case absolute is not found
 */
 char	*correct_path_cmd(t_pipex *pepe, char *cmd)
 {
-	if (cmd[0] == '/' || cmd[0] == '.') //hoeft niet! je checkt gewoon direct de pwd (alleen access)
+	char	*temp;
+
+	if (access(cmd, F_OK) == 0)
 	{
-		if (access(cmd, F_OK) == 0)
-			return (ft_strdup(cmd));
-		return (NULL);
+		temp = ft_strdup(cmd);
+		if (!temp)
+			error_brexit("malloc fail", errno);
+		return (temp);
 	}
 	else
 		return (get_cmd(pepe, cmd));

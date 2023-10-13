@@ -6,7 +6,7 @@
 #    By: qtrinh <qtrinh@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/03/01 15:08:12 by qtrinh        #+#    #+#                  #
-#    Updated: 2023/09/29 15:24:15 by robertrinh    ########   odam.nl          #
+#    Updated: 2023/10/13 14:49:05 by qtrinh        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C ./libft
-	@echo "${BOLD_GREEN}you done pijpen? ${END_COLOUR}"
+	@echo "${BOLD_GREEN}we out here ${END_COLOUR}"
 
 re: fclean all
 
