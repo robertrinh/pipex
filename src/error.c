@@ -6,7 +6,7 @@
 /*   By: robertrinh <robertrinh@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:15:32 by robertrinh    #+#    #+#                 */
-/*   Updated: 2023/10/12 16:53:32 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/10/13 12:14:12 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,17 @@ void	error_brexit(char *str, int error)
 	exit(error);
 }
 
-void	error_access(char *path)
+void	error_access(void)
 {
 	ft_putstr_fd("pipex: ", STDERR_FILENO);
-	ft_putstr_fd(path, STDERR_FILENO);
+	// ft_putstr_fd(path, STDERR_FILENO);
 	ft_putstr_fd(": permission denied \n", STDERR_FILENO);
 	exit(126); //not an executable
 }
 
-void	error_path(char *cmd)
+void	error_command(void)
 {
 	ft_putstr_fd("pipex: ", STDERR_FILENO);
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+	ft_putstr_fd("command not found\n", STDERR_FILENO);
 	exit(127); //command no found
 }

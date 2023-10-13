@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 16:04:08 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/10/12 17:02:47 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/10/13 14:30:53 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**get_path(char **envp)
 
 	env_path = parse_env(envp);
 	if (!env_path)
-		error_brexit("no path", errno);
+		error_brexit("no path, you lost the way", errno);
 	split_path = ft_split(env_path, ':');
 	if (!split_path)
 		error_brexit("split fail", errno);
@@ -63,7 +63,7 @@ char	**get_path(char **envp)
 */
 char	*correct_path_cmd(t_pipex *pepe, char *cmd)
 {
-	if (cmd[0] == '/' || cmd[0] == '.')
+	if (cmd[0] == '/' || cmd[0] == '.') //hoeft niet! je checkt gewoon direct de pwd (alleen access)
 	{
 		if (access(cmd, F_OK) == 0)
 			return (ft_strdup(cmd));

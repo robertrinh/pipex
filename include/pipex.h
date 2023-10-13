@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:08:17 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/10/12 16:49:15 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/10/13 12:21:16 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 /* perror */
 # include <stdio.h>
 # include <string.h>
+
 /* waitpid, wait */
 # include <sys/wait.h>
 # include <sys/errno.h>
@@ -55,8 +56,9 @@ char	*correct_path_cmd(t_pipex *pepe, char *cmd);
 void	run_cmd(char **envp, t_pipex *pepe, int cmdlen);
 char	*get_cmd(t_pipex *pepe, char *cmd);
 
-void	error_path(char *cmd);
-void	error_access(char *path);
+void	error_command(void);
+void	error_access(void);
+void	check_nullspace(char *str);
 
 void	kiddo_1_write(t_pipex *pepe, char **envp);
 void	kiddo_2_read(t_pipex *pepe, char **envp);
