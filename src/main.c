@@ -6,7 +6,7 @@
 /*   By: robertrinh <robertrinh@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:21:24 by robertrinh    #+#    #+#                 */
-/*   Updated: 2023/10/13 16:32:30 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/10/13 16:59:43 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	*close_program(t_pipex *pepe)
 	close_pipes(pepe->pipefd[READ], pepe->pipefd[WRITE]);
 	waitpid(pepe->kiddo1, &kidstatus1, 0);
 	waitpid(pepe->kiddo2, &kidstatus2, 0);
-	// atexit(&leaks_check); //delete
+	atexit(&leaks_check); //delete
 	if (WIFEXITED(kidstatus2))
 		exit(WEXITSTATUS(kidstatus2));
 	exit(EXIT_SUCCESS);

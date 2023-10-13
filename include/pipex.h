@@ -6,7 +6,7 @@
 /*   By: qtrinh <qtrinh@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/01 15:08:17 by qtrinh        #+#    #+#                 */
-/*   Updated: 2023/10/13 16:02:09 by qtrinh        ########   odam.nl         */
+/*   Updated: 2023/10/13 17:14:30 by qtrinh        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdio.h>
 # include <string.h>
 
-/* waitpid, wait */
+/* waitpid */
 # include <sys/wait.h>
 # include <sys/errno.h>
 
@@ -47,23 +47,24 @@ typedef struct s_pipex
 # define READ 0
 # define WRITE 1
 
+/* pipex */
 t_pipex	*init_bruv(char **av, char **envp);
-void	error_brexit(char *str, int error);
 int		pipex(t_pipex *pepe);
 void	close_pipes(int fd_one, int fd_two);
+void	kiddo_1_write(t_pipex *pepe, char **envp);
+void	kiddo_2_read(t_pipex *pepe, char **envp);
+
+/* paths ft. commands */
 char	**get_path(char **envp);
 char	*correct_path_cmd(t_pipex *pepe, char *cmd);
-void	run_cmd(char **envp, t_pipex *pepe, int cmdlen);
 char	*get_cmd(t_pipex *pepe, char *cmd);
+void	run_cmd(char **envp, t_pipex *pepe, int cmdlen);
+void	check_nullspace(char *str);
 
+/* errors */
+void	error_brexit(char *str, int error);
 void	error_arg(void);
 void	error_command(char *str);
 void	error_access(char *cmd);
-void	error_filedir(void);
-void	error_nullspace(char *str, int error);
-void	check_nullspace(char *str);
-
-void	kiddo_1_write(t_pipex *pepe, char **envp);
-void	kiddo_2_read(t_pipex *pepe, char **envp);
 
 #endif
